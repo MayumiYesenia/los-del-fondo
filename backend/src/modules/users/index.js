@@ -1,4 +1,11 @@
-const db = require('../../DB/mysql');
-const controller = require('./controller');
+const app = require('./app');
+const tracer = require('dd-trace').init({
 
-module.exports = controller(db);
+service: 'mi_backend_service',
+env: '<development>',
+version: '1.0.0',
+});
+
+app.listen(app.get('port'), () => {
+console.log(`Server on port ${app.get('port')}`);
+});
